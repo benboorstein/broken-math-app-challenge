@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title>My broken math app</title>
+    </head>
+    <body>
+        <h1>A simple math app</h1>
+        <form>
+            <p><label for="solution">Solve this equation</label></p>
+            <span class="operand"></span>
+            <span>+</span>
+            <span class="operand"></span>
+            <span>=</span>
+            <input type="tel" id="solution" name="solution" />
+            <p id="message"></p>
+            <input type="submit" id="solve" value="Solve" />
+        </form>
+
+        <script type="text/javascript">
+
+            // Generate a random number between 1 and 10
+            function newRandomNumber() {
+                Math.ceil(Math.random() * 10);
+            }
+
+            // Assign random numbers to each operand
+            function generateNewEquation() {
+                operands.forEach(
+                    function (operand) {
+                        operand.textContent = newRandomNumber;
+                    }
+                )
+            }
+
+            // Show message for wrong answer
+            function wrongAnswer(solution) {
+                message.textContent = `Nope. ${operands[0].textContent} + ${operands[1].textContent} was ${solution}`;
+            }
+
+            // Show message for right answer
+            function rightAnswer(solution) {
+                message.textContent = `Great job! ${operands[0].textContent} + ${operands[1].textContent} was ${solution}`;
+            }
+
+            // Reset and return focus to entry field
+            function clearEntryField() {
+                solutionEntry.value = "";
+                solutionEntry.focus();
+            }
+
+            // Compare sum of operands to user-entered value
+            function checkSolution(event, operands, answer) {
+                event.preventDefault();
+                var solution = Number(operands[0].textContent) + operands[1].textContent;
+                solution = answer ? rightAnswer(solution) : wrongAnswer(solution);
+                generateNewEquation();
+                clearEntryField();
+            }
+
+            // Select necessary DOM elements
+            var operands = document.querySelectorAll(".operand");
+            var solutionEntry = document.getElementById("solution");
+            var message = document.getElementById("message");
+            var solveButton = document.getElementById("solve");
+
+            // Add click handler to 'Solve' button
+            solveButton.addEventListener('click', function(e) {
+                checkSolution(e, operands);
+            });
+
+            // Reset/Generate new equation
+            generateNewEquation();
+        </script>
+
+    </body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
