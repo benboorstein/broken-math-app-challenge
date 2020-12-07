@@ -21,14 +21,13 @@
 
             // Generate a random number between 1 and 10
             function newRandomNumber() {
-                Math.ceil(Math.random() * 10);
+                return Math.ceil(Math.random() * 10);
             }
 
             // Assign random numbers to each operand
             function generateNewEquation() {
-                operands.forEach(
-                    function (operand) {
-                        operand.textContent = newRandomNumber();
+                operands.forEach(function(operand) {
+                        operand.textContent = newRandomNumber(); // I added () after this function name. Pretty sure this is correct here.
                     }
                 )
             }
@@ -52,8 +51,10 @@
             // Compare sum of operands to user-entered value
             function checkSolution(event, operands, answer) {
                 event.preventDefault();
-                var solution = Number(operands[0].textContent) + operands[1].textContent;
-                solution = answer ? rightAnswer(solution) : wrongAnswer(solution);
+                var solution = Number(operands[0].textContent) + Number(operands[1].textContent);
+                // solution = answer ? rightAnswer(solution) : wrongAnswer(solution); // pretty sure this line is completely incorrect
+                // LEFT OFF HERE:
+                var answer = solution ? rightAnswer(solution) : wrongAnswer(solution);
                 generateNewEquation();
                 clearEntryField();
             }
