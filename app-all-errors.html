@@ -52,9 +52,7 @@
             function checkSolution(event, operands, answer) {
                 event.preventDefault();
                 var solution = Number(operands[0].textContent) + Number(operands[1].textContent);
-                // solution = answer ? rightAnswer(solution) : wrongAnswer(solution); // pretty sure this line is completely incorrect
-                // LEFT OFF HERE:
-                var answer = solution ? rightAnswer(solution) : wrongAnswer(solution);
+                solution == answer ? rightAnswer(solution) : wrongAnswer(solution);
                 generateNewEquation();
                 clearEntryField();
             }
@@ -67,7 +65,7 @@
 
             // Add click handler to 'Solve' button
             solveButton.addEventListener('click', function(e) {
-                checkSolution(e, operands);
+                checkSolution(e, operands, solutionEntry.value);
             });
 
             // Reset/Generate new equation
